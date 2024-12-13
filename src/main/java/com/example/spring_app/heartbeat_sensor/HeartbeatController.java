@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HeartbeatController {
 
+    @SuppressWarnings("unused")
     @Autowired
     private HeartbeatSensor heartbeatSensor;
 
     @GetMapping("/heartbeat")
     public int getHeartBeat() {
-        return 0;
+        RandomHeartbeat randomHeartbeat = new RandomHeartbeat();
+        return randomHeartbeat.get();
     }
 }
