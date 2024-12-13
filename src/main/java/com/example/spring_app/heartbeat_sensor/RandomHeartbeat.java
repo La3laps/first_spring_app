@@ -13,7 +13,8 @@ public class RandomHeartbeat implements HeartbeatSensor {
             SecureRandom randNum = new SecureRandom();
             return randNum.nextInt(100);
         } catch (Exception e) {
-            throw new UnsupportedOperationException("Not supported yet.");
+            System.err.println(e.getMessage());
+            return 0;
         }
     }
 
