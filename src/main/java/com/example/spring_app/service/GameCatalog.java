@@ -1,4 +1,4 @@
-package com.example.spring_app.board_game;
+package com.example.spring_app.service;
 
 import java.util.ArrayList;
 
