@@ -80,11 +80,4 @@ public class GameCreationDTO {
         }
     }
 
-    public ArrayList<ArrayList<String>> updateOnGoingGames(ArrayList<ArrayList<String>> ongoingGames) {
-        ArrayList<String> settings = setCurrentGameSettings();
-        if(this.gameId != null){
-            ongoingGames.add(settings);
-        }
-        return ongoingGames;
-    }
 }

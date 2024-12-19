@@ -18,7 +18,6 @@ import fr.le_campus_numerique.square_games.engine.Game;
 @RestController
 public class GameController {
     Game currentGame;
-    private final ArrayList<ArrayList<String>> ongoingGames = new ArrayList<>();
 
     @Autowired
     private GameServiceImpl gameService;
@@ -30,8 +29,8 @@ public class GameController {
         gameSettings = gameCreationParams;
         if (gameSettings != null) {
             gameSettings.setGameDTO(currentGame);
-            gameSettings.setCurrentGameSettings();
-            gameSettings.updateOnGoingGames(ongoingGames);
+            ArrayList<String> currentGameSettings = gameSettings.setCurrentGameSettings();
+            gameService.updateGameList(currentGameSettings);
         }
         return currentGame;
     }
@@ -43,11 +42,13 @@ public class GameController {
 
     @GetMapping("/games/{gameId}")
     public ArrayList<String> getGame(@PathVariable String gameId) {
-
-        for (ArrayList<String> elem : ongoingGames) {
-            for (String settings : elem) {
-                if (settings.equals(gameId)) {
-                    return elem;
+        if (gameService != null) {
+            ArrayList<ArrayList<String>> gameList = gameService.getGameList();
+            for (ArrayList<String> elem : gameList) {
+                for (String settings : elem) {
+                    if (settings.equals(gameId)) {
+                        return elem;
+                    }
                 }
             }
         }
@@ -64,13 +65,13 @@ public class GameController {
 
     @GetMapping("/games/ongoing-games")
     public ArrayList<ArrayList<String>> getOngoingGames() {
-        if (gameSettings != null) {
-            return ongoingGames;
+        if (gameSettings != null && gameService != null) {
+            return gameService.getGameList();
         } else {
             ArrayList<ArrayList<String>> noGames = new ArrayList<>();
             ArrayList<String> emptyList = new ArrayList<>();
 
-            emptyList.add("There is no ongoing game..."); 
+            emptyList.add("There is no ongoing game...");
             noGames.add(emptyList);
 
             return noGames;
@@ -79,10 +80,15 @@ public class GameController {
 
     @DeleteMapping("/games/{gameId}")
     public void deleteGame(@PathVariable String gameId) {
-        for (ArrayList<String> elem : ongoingGames) {
-            if (elem.get(0).equals(gameId)) {
-                ongoingGames.remove(elem);
+        if (gameService != null) {
+            ArrayList<ArrayList<String>> gameList = gameService.getGameList();
+
+            for (ArrayList<String> elem : gameList) {
+                if (elem.get(0).equals(gameId)) {
+                    gameList.remove(elem);
+                }
             }
         }
+
     }
 }
