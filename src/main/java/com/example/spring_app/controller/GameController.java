@@ -3,10 +3,10 @@ package com.example.spring_app.controller;
 import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,7 +42,16 @@ public class GameController {
     }
 
     @GetMapping("/games/{gameId}")
-    public ArrayList<String> getGame() {
+    public ArrayList<String> getGame(@PathVariable String gameId) {
+
+        for (ArrayList<String> elem : ongoingGames) {
+            for (String settings : elem) {
+                if (settings.equals(gameId)) {
+                    return elem;
+                }
+            }
+        }
+
         if (gameSettings != null) {
             return gameSettings.setCurrentGameSettings();
         } else {
@@ -61,17 +70,19 @@ public class GameController {
             ArrayList<ArrayList<String>> noGames = new ArrayList<>();
             ArrayList<String> emptyList = new ArrayList<>();
 
-            emptyList.add("There is no ongoing game...");
+            emptyList.add("There is no ongoing game..."); 
             noGames.add(emptyList);
 
             return noGames;
         }
     }
 
-    @PutMapping("/games/{status}")
-    public String updateStatus(@PathVariable String status, @RequestBody String entity) {
-        // TODO: process PUT request
-        return entity;
+    @DeleteMapping("/games/{gameId}")
+    public void deleteGame(@PathVariable String gameId) {
+        for (ArrayList<String> elem : ongoingGames) {
+            if (elem.get(0).equals(gameId)) {
+                ongoingGames.remove(elem);
+            }
+        }
     }
-
 }
