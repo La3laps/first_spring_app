@@ -1,13 +1,16 @@
 package com.example.spring_app.gamedto;
 
+import java.sql.Connection;
 import java.util.ArrayList;
+
+import org.springframework.stereotype.Repository;
 
 import com.example.spring_app.service.UserService;
 
 
-
+@Repository
 public class MySQLUserDAO implements IUserDAO {
-
+    private Connection connection;
     private final ArrayList<UserService> userList = new ArrayList<>();
 
     @Override
