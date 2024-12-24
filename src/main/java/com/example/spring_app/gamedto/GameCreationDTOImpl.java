@@ -8,17 +8,19 @@ import org.springframework.stereotype.Service;
 import fr.le_campus_numerique.square_games.engine.Game;
 
 @Service
-public class GameCreationDTO {
+public class GameCreationDTOImpl implements IGameCreationDTO{
     private String gameType;
     private int playerCount;
     private int boardSize;
     private UUID gameId;
     private String status;
-
+    
+    @Override
     public String getGameType() {
         return this.gameType;
     }
 
+    @Override
     public int getPlayerSettings(String gameType) {
         switch (gameType) {
             case "tictactoe":
@@ -36,6 +38,7 @@ public class GameCreationDTO {
         return this.playerCount;
     }
 
+    @Override
     public int getBoardSettings(String gameType) {
         switch (gameType) {
             case "tictactoe" -> {
@@ -61,6 +64,7 @@ public class GameCreationDTO {
         return "You need to create a game to play...";
     }
 
+    @Override
     public ArrayList<String> setCurrentGameSettings() {
         ArrayList<String> settings = new ArrayList<>();
 
@@ -73,6 +77,7 @@ public class GameCreationDTO {
         return settings;
     }
 
+    @Override
     public void setGameDTO(Game currentGame) {
         if (currentGame != null) {
             this.gameId = currentGame.getId();

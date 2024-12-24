@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
-import com.example.spring_app.gamedto.GameCreationDTO;
+import com.example.spring_app.gamedto.GameCreationDTOImpl;
 import com.example.spring_app.plugin.ConnectFourPlugin;
 import com.example.spring_app.plugin.TaquinPlugin;
 import com.example.spring_app.plugin.TicTacToePlugin;
@@ -17,7 +17,7 @@ public class GameServiceImpl implements GameService {
     private final ArrayList<ArrayList<String>> gameList = new ArrayList<>();
     
     @Override
-    public Game createGame(GameCreationDTO gameCreationParams) {
+    public Game createGame(GameCreationDTOImpl gameCreationParams) {
         switch (gameCreationParams.getGameType()) {
             case "tictactoe" -> {
                 return new TicTacToePlugin().createGame();

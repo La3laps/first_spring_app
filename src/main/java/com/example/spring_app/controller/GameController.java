@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_app.gamedto.GameCreationDTO;
+import com.example.spring_app.gamedto.GameCreationDTOImpl;
 import com.example.spring_app.service.GameServiceImpl;
 
 import fr.le_campus_numerique.square_games.engine.Game;
@@ -21,10 +21,10 @@ public class GameController {
 
     @Autowired
     private GameServiceImpl gameService;
-    private GameCreationDTO gameSettings;
+    private GameCreationDTOImpl gameSettings;
 
     @PostMapping("/games")
-    public Game createGame(@RequestBody GameCreationDTO gameCreationParams) {
+    public Game createGame(@RequestBody GameCreationDTOImpl gameCreationParams) {
         currentGame = gameService.createGame(gameCreationParams);
         gameSettings = gameCreationParams;
         if (gameSettings != null) {
