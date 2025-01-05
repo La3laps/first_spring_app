@@ -1,7 +1,6 @@
 package com.example.spring_app.gamedto;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ public class GameCreationDTOImpl implements IGameCreationDTO{
     private String gameType;
     private int playerCount;
     private int boardSize;
-    private UUID gameId;
+    private String gameId;
     private String status;
     
     @Override
@@ -80,7 +79,7 @@ public class GameCreationDTOImpl implements IGameCreationDTO{
     @Override
     public void setGameDTO(Game currentGame) {
         if (currentGame != null) {
-            this.gameId = currentGame.getId();
+            this.gameId = currentGame.getId().toString();
             this.status = currentGame.getStatus().toString();
         }
     }
