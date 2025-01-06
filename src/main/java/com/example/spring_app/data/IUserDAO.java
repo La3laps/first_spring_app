@@ -7,7 +7,7 @@ public interface IUserDAO {
 
     UserData getUserById(int id);
 
-    void addUser(UserData user);
+    int addUser(UserData user);
 
     void updateUser(UserData user);
 

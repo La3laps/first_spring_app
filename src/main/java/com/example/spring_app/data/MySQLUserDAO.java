@@ -1,34 +1,45 @@
 package com.example.spring_app.data;
 
-import java.sql.Connection;
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 
 @Repository
 public class MySQLUserDAO implements IUserDAO {
-    private Connection connection;
-    private final ArrayList<UserData> userList = new ArrayList<>();
+    // private Connection connection;
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
-    public ArrayList<UserData> getAllUsers(){
-        return userList;
+    public ArrayList<UserData> getAllUsers() {
+        return (ArrayList<UserData>) jdbcTemplate.query("SELECT * FROM USERS",
+                new BeanPropertyRowMapper<>(UserData.class));
     };
 
     @Override
-    public UserData getUserById(int id){
-        return new UserData(null, null, null, null);
+    public UserData getUserById(int userId) {
+        UserData userData = jdbcTemplate.queryForObject("SELECT * FROM USERS WHERE id = ?", new Object[] { userId },
+                new BeanPropertyRowMapper<>(UserData.class));
+        return userData;
     };
 
     @Override
-    public void addUser(UserData user){};
-    
-    @Override
-    public void updateUser(UserData user){};
+    public int addUser(UserData user) {
+        return jdbcTemplate.update("INSERT INTO USERS (name, email) VALUES (?, ?)", user.getName(),
+                user.getEmail());
+    };
 
     @Override
-    public void deleteUser(int id){
+    public void updateUser(UserData user) {
+        jdbcTemplate.update("UPDATE USERS SET name = ?, email = ? WHERE id = ?", user.getName(),
+                user.getEmail(), user.getId());
+    };
 
+    @Override
+    public void deleteUser(int id) {
+        jdbcTemplate.update("DELETE FROM USERS WHERE id = ?", id);
     };
 }

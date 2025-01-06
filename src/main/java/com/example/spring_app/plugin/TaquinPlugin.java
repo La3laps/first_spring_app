@@ -15,7 +15,7 @@ public class TaquinPlugin implements GamePlugin {
     private final TaquinGameFactory taquin = new TaquinGameFactory();
 
     @Autowired
-     MessageSource messageSource;
+    MessageSource messageSource;
 
     @Value("${game.taquin.default-player-count}")
     private int defaultPlayerCount;
@@ -23,10 +23,9 @@ public class TaquinPlugin implements GamePlugin {
     @Value("${game.taquin.default-board-size}")
     private int defaultBoardSize;
 
-
     @Override
     public String getName(Locale locale) {
-        return messageSource.getMessage("game.tictactoe.name", null, locale);
+        return messageSource.getMessage("game.taquin.name", null, locale);
     }
 
     @Override

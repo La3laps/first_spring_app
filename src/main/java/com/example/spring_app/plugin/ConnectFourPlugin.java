@@ -15,14 +15,13 @@ public class ConnectFourPlugin implements GamePlugin {
     private final ConnectFourGameFactory connectFour = new ConnectFourGameFactory();
 
     @Autowired
-     MessageSource messageSource;
+    MessageSource messageSource;
 
     @Value("${game.connect4.default-player-count}")
     private int defaultPlayerCount;
 
     @Value("${game.connect4.default-board-size}")
     private int defaultBoardSize;
-
 
     @Override
     public String getName(Locale locale) {

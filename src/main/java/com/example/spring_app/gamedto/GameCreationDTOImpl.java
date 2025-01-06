@@ -7,13 +7,13 @@ import org.springframework.stereotype.Service;
 import fr.le_campus_numerique.square_games.engine.Game;
 
 @Service
-public class GameCreationDTOImpl implements IGameCreationDTO{
+public class GameCreationDTOImpl implements IGameCreationDTO {
     private String gameType;
     private int playerCount;
     private int boardSize;
     private String gameId;
     private String status;
-    
+
     @Override
     public String getGameType() {
         return this.gameType;
@@ -58,7 +58,7 @@ public class GameCreationDTOImpl implements IGameCreationDTO{
 
     private String getCurrentIdIfExists() {
         if (this.gameId != null) {
-            return this.gameId.toString();
+            return this.gameId;
         }
         return "You need to create a game to play...";
     }
