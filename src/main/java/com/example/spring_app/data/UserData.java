@@ -1,13 +1,24 @@
 package com.example.spring_app.data;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "USERS")
 public class UserData {
 
-    private Long id;
-    private String name;
-    private String email;
-    private String password;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id;
 
-    public UserData(Long id, String name, String email) {
+    private String name;
+
+    private String email;
+
+    public UserData(int id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -17,11 +28,11 @@ public class UserData {
     }
     // Getters et setters
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -41,17 +52,9 @@ public class UserData {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String toString() {
-        String result = this.email + ", " + this.id + ", " + this.password + ", " + this.name;
+        String result = this.email + ", " + this.id + ", " + this.name;
         return result;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.spring_app.data;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -13,9 +13,10 @@ public class MySQLUserDAO implements IUserDAO {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    // JDBC
     @Override
-    public ArrayList<UserData> getAllUsers() {
-        return (ArrayList<UserData>) jdbcTemplate.query("SELECT * FROM USERS",
+    public List<UserData> getAllUsers() {
+        return (List<UserData>) jdbcTemplate.query("SELECT * FROM USERS",
                 new BeanPropertyRowMapper<>(UserData.class));
     };
 
@@ -34,6 +35,7 @@ public class MySQLUserDAO implements IUserDAO {
 
     @Override
     public void updateUser(UserData user) {
+
         jdbcTemplate.update("UPDATE USERS SET name = ?, email = ? WHERE id = ?", user.getName(),
                 user.getEmail(), user.getId());
     };
@@ -41,5 +43,6 @@ public class MySQLUserDAO implements IUserDAO {
     @Override
     public void deleteUser(int id) {
         jdbcTemplate.update("DELETE FROM USERS WHERE id = ?", id);
-    };
+    }
+
 }

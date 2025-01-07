@@ -1,6 +1,6 @@
 package com.example.spring_app.controller;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,29 +11,33 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_app.data.MySQLUserDAO;
+import com.example.spring_app.data.GameUserDTO;
+import com.example.spring_app.data.JPAUserDAO;
 import com.example.spring_app.data.UserData;
 
 @RestController
 public class UserController {
 
     @Autowired
-    MySQLUserDAO msqlDAO;
+    // MySQLUserDAO msqlDAO;
+    JPAUserDAO msqlDAO;
 
     @PostMapping("/user")
-    public void addUser(@RequestBody UserData user) {
-        msqlDAO.addUser(user);
+    public void addUser(@RequestBody GameUserDTO user) {
+        UserData userData = new UserData();
+        userData.setEmail(user.email());
+        userData.setName(user.name());
+        msqlDAO.addUser(userData);
     }
 
-    @GetMapping("/users")
-    public ArrayList<UserData> getMethodName() {
+    @GetMapping("/user")
+    public List<UserData> getUser() {
         return msqlDAO.getAllUsers();
     }
 
     @GetMapping("/user/{userId}")
     public String showUser(@PathVariable String userId) {
         String username = msqlDAO.getUserById(Integer.parseInt(userId)).getName();
-        System.out.println(msqlDAO.getUserById(Integer.parseInt(userId)).getName());
         String userEmail = msqlDAO.getUserById(Integer.parseInt(userId)).getEmail();
 
         String result = "The current user is " + username + ", his/her email is " + userEmail;
@@ -49,7 +53,8 @@ public class UserController {
 
     @DeleteMapping("/user")
     public String deleteUser(@RequestBody UserData user) {
-        msqlDAO.deleteUser(user.getId().intValue());
+
+        msqlDAO.deleteUser(user.getId());
 
         return "User: " + user.getName() + " was deleted from DB.";
     }

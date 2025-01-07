@@ -1,9 +1,12 @@
 package com.example.spring_app.data;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public interface IUserDAO {
-    ArrayList<UserData> getAllUsers();
+    List<UserData> getAllUsers();
 
     UserData getUserById(int id);
 
