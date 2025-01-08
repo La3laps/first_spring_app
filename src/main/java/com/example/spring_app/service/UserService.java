@@ -1,18 +1,41 @@
 package com.example.spring_app.service;
 
-import com.example.spring_app.data.IUserDAO;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.spring_app.data.JPAUserDAO;
 import com.example.spring_app.data.UserData;
 
+@Service
 public class UserService implements IUserService {
 
-    private IUserDAO userDAO;
+    @Autowired
+    private final JPAUserDAO userDAO;
 
-    public UserService(IUserDAO userDAO) {
+    public UserService(JPAUserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
-    public int addUser(UserData user) {
+    public void addUser(UserData user) {
         userDAO.addUser(user);
-        return 1;
+    }
+
+    public List<UserData> getAllUsers() {
+        return userDAO.getAllUsers();
+    }
+
+    public UserData getUserById(int userId) {
+        return userDAO.getUserById(userId);
+    }
+
+    public void updateUser(UserData user) {
+        userDAO.updateUser(user);
+    }
+
+    public void deleteUser(int id) {
+        userDAO.deleteUser(id);
+        ;
     }
 }

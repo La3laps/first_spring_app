@@ -1,5 +1,6 @@
 package com.example.spring_app.data;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,11 +12,12 @@ import jakarta.persistence.Table;
 public class UserData {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "name")
     private String name;
-
+    @Column(name = "email")
     private String email;
 
     public UserData(int id, String name, String email) {

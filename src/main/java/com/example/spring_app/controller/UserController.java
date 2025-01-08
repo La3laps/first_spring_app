@@ -32,7 +32,8 @@ public class UserController {
 
     @GetMapping("/user")
     public List<UserData> getUser() {
-        return msqlDAO.getAllUsers();
+        List<UserData> all = msqlDAO.getAllUsers();
+        return all;
     }
 
     @GetMapping("/user/{userId}")

@@ -12,7 +12,7 @@ import fr.le_campus_numerique.square_games.engine.connectfour.ConnectFourGameFac
 
 @Component
 public class ConnectFourPlugin implements GamePlugin {
-    private final ConnectFourGameFactory connectFour = new ConnectFourGameFactory();
+    private ConnectFourGameFactory connectFour = new ConnectFourGameFactory();
 
     @Autowired
     MessageSource messageSource;
