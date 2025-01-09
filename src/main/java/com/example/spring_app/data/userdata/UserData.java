@@ -1,4 +1,4 @@
-package com.example.spring_app.data;
+package com.example.spring_app.data.userdata;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_app.gamedto.GameCreationDTOImpl;
-import com.example.spring_app.service.GameServiceImpl;
+import com.example.spring_app.data.gamedata.GameCreationDTOImpl;
+import com.example.spring_app.service.gameservice.GameServiceImpl;
 
 import fr.le_campus_numerique.square_games.engine.Game;
 

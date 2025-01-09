@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_app.data.GameUserDTO;
-import com.example.spring_app.data.JPAUserDAO;
-import com.example.spring_app.data.UserData;
+import com.example.spring_app.data.userdata.GameUserDTO;
+import com.example.spring_app.data.userdata.JPAUserDAO;
+import com.example.spring_app.data.userdata.UserData;
 
 @RestController
 public class UserController {

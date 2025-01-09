@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_app.service.GameCatalog;
-import com.example.spring_app.service.GameCatalogImpl;
+import com.example.spring_app.service.gameservice.GameCatalog;
+import com.example.spring_app.service.gameservice.GameCatalogImpl;
 
 @RestController
 public class GameCatalogController {

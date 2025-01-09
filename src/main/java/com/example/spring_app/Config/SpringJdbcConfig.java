@@ -1,3 +1,4 @@
+package com.example.spring_app.Config;
 // package com.example.spring_app.data.Config;
 
 // import javax.sql.DataSource;

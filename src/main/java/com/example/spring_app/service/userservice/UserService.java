@@ -1,12 +1,12 @@
-package com.example.spring_app.service;
+package com.example.spring_app.service.userservice;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.spring_app.data.JPAUserDAO;
-import com.example.spring_app.data.UserData;
+import com.example.spring_app.data.userdata.JPAUserDAO;
+import com.example.spring_app.data.userdata.UserData;
 
 @Service
 public class UserService implements IUserService {

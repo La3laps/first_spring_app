@@ -1,4 +1,4 @@
-package com.example.spring_app.data;
+package com.example.spring_app.data.userdata;
 
 import java.util.List;
 
