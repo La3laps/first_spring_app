@@ -14,7 +14,7 @@ import fr.le_campus_numerique.square_games.engine.tictactoe.TicTacToeGameFactory
 public class TicTacToePlugin implements GamePlugin {
 
     private final TicTacToeGameFactory ticTacToe = new TicTacToeGameFactory();
-    
+
     @Autowired
     MessageSource messageSource;
 
@@ -30,7 +30,7 @@ public class TicTacToePlugin implements GamePlugin {
     }
 
     @Override
-    public Game createGame(){
+    public Game createGame() {
         return ticTacToe.createGame(defaultPlayerCount, defaultBoardSize);
 
     };

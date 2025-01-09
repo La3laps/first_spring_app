@@ -1,4 +1,4 @@
-package com.example.spring_app.data.gamedata;
+package com.example.spring_app.data.gamecollection;
 import java.util.ArrayList;
 
 public interface IGameCollectionDTO {

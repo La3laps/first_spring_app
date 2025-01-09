@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.spring_app.data.gamedata.GameCreationDTOImpl;
-import com.example.spring_app.service.gameservice.GameServiceImpl;
+import com.example.spring_app.data.gamedata.GameData;
+import com.example.spring_app.service.gameservice.GameService;
 
 import fr.le_campus_numerique.square_games.engine.Game;
 
@@ -20,16 +20,16 @@ public class GameController {
     Game currentGame;
 
     @Autowired
-    private GameServiceImpl gameService;
-    private GameCreationDTOImpl gameSettings;
+    private GameService gameService;
+    private GameData gameData;
 
     @PostMapping("/games")
-    public Game createGame(@RequestBody GameCreationDTOImpl gameCreationParams) {
-        currentGame = gameService.createGame(gameCreationParams);
-        gameSettings = gameCreationParams;
-        if (gameSettings != null) {
-            gameSettings.setGameDTO(currentGame);
-            ArrayList<String> currentGameSettings = gameSettings.setCurrentGameSettings();
+    public Game createGame(@RequestBody GameData gameData) {
+        currentGame = gameService.createGame(gameData);
+
+        if (gameData != null) {
+            gameData.setGameDTO(currentGame);
+            ArrayList<String> currentGameSettings = gameData.setCurrentGameSettings();
             gameService.updateGameList(currentGameSettings);
         }
         return currentGame;
@@ -53,8 +53,8 @@ public class GameController {
             }
         }
 
-        if (gameSettings != null) {
-            return gameSettings.setCurrentGameSettings();
+        if (gameData != null) {
+            return gameData.setCurrentGameSettings();
         } else {
             ArrayList<String> noGame = new ArrayList<>();
             noGame.add("There is no ongoing game...");
@@ -65,7 +65,7 @@ public class GameController {
 
     @GetMapping("/games/ongoing-games")
     public ArrayList<ArrayList<String>> getOngoingGames() {
-        if (gameSettings != null && gameService != null) {
+        if (gameData != null && gameService != null) {
             return gameService.getGameList();
         } else {
             ArrayList<ArrayList<String>> noGames = new ArrayList<>();
